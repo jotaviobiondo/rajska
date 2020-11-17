@@ -132,6 +132,8 @@ defmodule Rajska do
 
       def unauthorized_message(_resolution), do: "unauthorized"
 
+      def unauthorized_object_message(_resolution, %{identifier: identifier}), do: "Not authorized to access object #{identifier}"
+
       def super_user?(context) do
         context
         |> get_current_user()
