@@ -138,6 +138,8 @@ defmodule Rajska do
 
       def unauthorized_query_scope_message(_resolution, object_type), do: "Not authorized to access this #{replace_underscore(object_type)}"
 
+      def unauthorized_object_scope_message(_context, %{identifier: identifier}), do: "Not authorized to access object #{identifier}"
+
       def super_user?(context) do
         context
         |> get_current_user()
