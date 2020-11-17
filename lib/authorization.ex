@@ -31,6 +31,8 @@ defmodule Rajska.Authorization do
 
   @callback unauthorized_field_message(resolution :: Resolution.t(), field :: atom()) :: String.t()
 
+  @callback unauthorized_query_scope_message(resolution :: Resolution.t(), object_type :: atom()) :: String.t()
+
   @callback context_role_authorized?(context, allowed_role :: role) :: boolean()
 
   @callback context_user_authorized?(context, scoped_struct, rule) :: boolean()

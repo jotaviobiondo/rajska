@@ -136,6 +136,8 @@ defmodule Rajska do
 
       def unauthorized_field_message(_resolution, field), do: "Not authorized to access field #{field}"
 
+      def unauthorized_query_scope_message(_resolution, object_type), do: "Not authorized to access this #{replace_underscore(object_type)}"
+
       def super_user?(context) do
         context
         |> get_current_user()
@@ -154,6 +156,14 @@ defmodule Rajska do
         context
         |> get_current_user()
         |> has_user_access?(scoped_struct, rule)
+      end
+
+      defp replace_underscore(string) when is_binary(string), do: String.replace(string, "_", " ")
+
+      defp replace_underscore(atom) when is_atom(atom) do
+        atom
+        |> Atom.to_string()
+        |> replace_underscore()
       end
 
       defoverridable Authorization
